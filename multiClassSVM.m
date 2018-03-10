@@ -68,11 +68,8 @@ classdef MultiClassSVM
             classes = unique(Y);
             for i = 1:size(X,2)
                 temp = obj.W' * X(:,i);
-                temp(Y(i,1) == classes) = [];
+                temp(Y(i,1) == classes) = -Inf;
                 [~, i_cap] = max(temp);
-                if i_cap >= i
-                    i_cap = i_cap + 1;
-                end    
                 error = error + max(0,obj.W(:,i_cap)' * X(:,i) - obj.W(:,Y(i,1) == classes)' * X(:,i) + 1);
             end
 

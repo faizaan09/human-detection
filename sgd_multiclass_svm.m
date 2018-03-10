@@ -1,10 +1,10 @@
-% load('./hw2data/q3_2_data.mat');
-max_epoch = 200;
+load('./hw2data/q3_2_data.mat');
+max_epoch = 2000;
 eta_0 = 0.1;
 eta_1 = 150;
 % data_dims = size(trD);
 W = zeros(size(trD,1),length(unique(trLb)));
-C = 0.01;
+C = 10;
 batch_size = 20;
 clf = MultiClassSVM(W,C,eta_0,eta_1);
 [train_loss, val_loss] = clf.train(trD, trLb, valD, valLb, batch_size,max_epoch);
