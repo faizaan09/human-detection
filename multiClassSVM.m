@@ -51,11 +51,13 @@ classdef MultiClassSVM
         
         function [gradient] = get_subgradient (obj,X,Y,i,i_cap,classes) %i_cap,C,X,Y,W)
             gradient = zeros(size(obj.W));
+            yi = Y(i,1) == classes;
+            xi = X(:,i);
             for ind = 1:size(gradient,2)
-                if (obj.W(:,i_cap)'*X(:,i) +1 > obj.W(:,Y(i,1) == classes)'*X(:,i))
+                if (obj.W(:,i_cap)'*xi +1 > obj.W(:,yi)'*x)
                     if ind == find(Y(i,1) == classes)
                         gradient(:,ind) = - obj.C* X(:,i);
-                    elseif ind == find(Y(i_cap,1) == classes)  
+                    elseif ind == i_cap  
                         gradient(:,ind) = obj.C *X(:,i);
                     end
                 end
